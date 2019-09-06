@@ -32,6 +32,9 @@ df.to_csv(<path>)
 
 ### 3. Set up dialogflow
 
+First, make sure you understand the basics of Dialogflow: you can start [here](https://cloud.google.com/dialogflow/docs/).
+
+![Screenshot](diaceo.png)
 
 
 ### 4. Create Cloud Function
@@ -92,10 +95,7 @@ exports.ceo = functions.https.onRequest((request,response) =>{
 
     }
     
-    
-    
-    
-
+ 
 }
 
 ```
