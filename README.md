@@ -40,34 +40,36 @@ First, make sure you understand the basics of Dialogflow: you can start [here](h
 ### 4. Create Cloud Function
 
 ```javascript
+// import BigQuery module
 const {BigQuery} = require('@google-cloud/bigquery');
+
+// you can deploy this directly from your machine using gcloud functions deploy ceo --runtime nodejs8 --trigger-http
 
 exports.ceo = functions.https.onRequest((request,response) =>{
 
-        async function datarequest(agent) {
+        async function datarequest(agent) { // async -> so we can use await later
 
         const bigquery = new BigQuery();
 
+        // declare variables
         let metric
         let dimension
-        let date = agent.parameters.date
-        console.log(date.substr(0, 10))
+        let date = agent.parameters.date // from Dialogflow
+        
         let dateString = date.substr(0, 10)
-        agent.add(dateString)
-        //let dateString = date.substr(0, 10);
-            // Queries the U.S. given names dataset for the state of Texas.
 
-        //agent.add(dateString)
-
-        if (agent.parameters.querymetric === 'revenue') {
+        // this could be done better
+        if (agent.parameters.querymetric === 'revenue') { // user asked for Revenue
             metric    = 'revenue'
             dimension = 'pounds'
-        } else if (agent.parameters.querymetric === 'bookings') {
+        } else if (agent.parameters.querymetric === 'bookings') { // user asked for Revenue
             metric    = 'bookings'
             dimension = 'bookings'
         }
 
-        console.log(`Reading ${metric} ${dimension}`)
+        console.log(`Reading ${metric} ${dimension}`) // testing
+        
+        // SQL Query
         const query = `SELECT ${metric} FROM testceo.ceo WHERE date = '${dateString}'`;
 
         const options = {
