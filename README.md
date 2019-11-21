@@ -1,4 +1,4 @@
-# ceo-reporting
+#  Super quick prototype
 The voice assistant that your CEO will love
 
 ![Screenshot](alex2.png)
